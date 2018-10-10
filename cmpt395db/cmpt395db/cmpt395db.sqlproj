@@ -60,6 +60,15 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="employee.sql" />
+    <Build Include="company.sql" />
+    <Build Include="employee_contracts.sql" />
+    <Build Include="employee_hours.sql" />
+    <Build Include="company_employees.sql" />
+    <Build Include="contract_empoyees.sql" />
+    <Build Include="company_contracts.sql" />
+    <Build Include="company_emplyee_contracts.sql" />
+    <Build Include="employee_contact.sql" />
+    <Build Include="company_contact.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="cmpt395db.refactorlog" />
