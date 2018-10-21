@@ -1,0 +1,31 @@
+﻿@model LoginModel
+@{
+	ViewData["Title"] = "Login Page";
+}
+
+<h2>Login</h2>
+
+ 
+<form method="post" asp-action="Index" asp-controller="Home">
+	<div asp-validation-summary="All"></div>
+
+
+	<div>
+		<label asp-for="Email"></label>
+		<input asp-for="Email" />
+		<span asp-validation-for="Email"></span>
+	</div>
+	
+
+	<div>
+		<label asp-for="Password"></label>
+		@*uses The login Model Password*@
+		<input asp-for="Password" />
+		<div><input type="submit" value="Log In" /></div>
+	</div>
+
+
+</form>
+
+
+
