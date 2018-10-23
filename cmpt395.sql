@@ -16,6 +16,7 @@ contractor_first_name varchar(20),
 contractor_last_name varchar(20),
 company_id int,
 email varchar(20),
+password varchar(20),
 primary key(contractor_id),
 foreign key(company_id) references company);
 
@@ -56,6 +57,7 @@ previousMonthHours int,
 primary key(time_sheet_id),
 foreign key(contract_id) references contracts);
 
-
-
+create table admin
+(admin_id int primary key,
+password varchar(20));
 
