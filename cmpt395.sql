@@ -12,9 +12,12 @@ primary key(company_id));
 
 create table contractor
 (contractor_id int,
-contractor_name varchar(20),
+contractor_first_name varchar(20),
+contractor_last_name varchar(20),
+company_id int,
 email varchar(20),
-primary key(contractor_id));
+primary key(contractor_id),
+foreign key(company_id) references company);
 
 
 create table contracts
