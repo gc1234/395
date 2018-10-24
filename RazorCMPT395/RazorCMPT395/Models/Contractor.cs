@@ -12,6 +12,7 @@ namespace RazorCMPT395.Models
         public string contractorLastName { get; set; }
         public int companyId { get; set; }
         public string email { get; set; }
+        public string password { get; set; }
 
     }
 }
