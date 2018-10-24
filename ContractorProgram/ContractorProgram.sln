@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractorProgram", "ContractorProgram\ContractorProgram.csproj", "{1180BC18-08C4-4F25-9321-2F42F0A6246F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1180BC18-08C4-4F25-9321-2F42F0A6246F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1180BC18-08C4-4F25-9321-2F42F0A6246F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1180BC18-08C4-4F25-9321-2F42F0A6246F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1180BC18-08C4-4F25-9321-2F42F0A6246F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD19366A-5EAA-42F1-8189-E62638368F85}
+	EndGlobalSection
+EndGlobal
