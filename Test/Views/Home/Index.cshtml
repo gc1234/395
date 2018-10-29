@@ -1,0 +1,44 @@
+﻿@model LoginModel
+@{
+	ViewData["Title"] = "Login";
+	Layout = "";
+}
+
+@* This Message is printed out if the user unsuccessfully login
+	@Author: Anthony Wong
+	@Version: 1.0
+	@Date: October 28, 2018
+	*@
+@if (!Model.FirstLogin)
+{
+	<p>Invalid Email or Password</p>
+}
+
+@* 
+	This is a post method that uses the Function Index in the Controller called HomeController and send the result
+	Back into the Model LoginModel.
+	@Author: Anthony Wong
+	@Version: 1.0
+	@Date: October 28, 2018
+*@
+<form method="post" asp-action="Index" asp-controller="Home">
+	<label asp-for="Email"></label>
+	<input asp-for="Email" />
+
+
+	<label asp-for="Password"></label>
+	<input asp-for="Password" />
+
+
+	<input type="submit" value="log in" />
+
+
+
+
+
+
+
+
+
+
+</form>
