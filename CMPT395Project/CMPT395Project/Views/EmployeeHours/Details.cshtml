@@ -1,0 +1,48 @@
+﻿@model CMPT395Project.Models.EmployeeHour
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EmployeeHour</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Month)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Month)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentMonth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CurrentMonth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PreviousMonth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PreviousMonth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contract.ContractId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.TimeSheetId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

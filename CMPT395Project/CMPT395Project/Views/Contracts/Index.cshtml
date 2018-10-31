@@ -1,0 +1,149 @@
+﻿@model IEnumerable<CMPT395Project.Models.Contract>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.P1CharRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P1PayRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P1StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P1EndtDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P2CharRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P2PayRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P2StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P2EndtDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P3CharRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P3PayRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P3StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P3EndtDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P4CharRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P4PayRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P4StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P4EndtDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Renewal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActiveContract)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contractor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.P1CharRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P1PayRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P1StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P1EndtDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P2CharRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P2PayRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P2StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P2EndtDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P3CharRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P3PayRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P3StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P3EndtDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P4CharRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P4PayRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P4StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P4EndtDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Renewal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActiveContract)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contractor.ContractorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.CompanyId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ContractId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ContractId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ContractId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

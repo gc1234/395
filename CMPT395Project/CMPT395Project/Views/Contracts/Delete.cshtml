@@ -1,0 +1,141 @@
+﻿@model CMPT395Project.Models.Contract
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Contract</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.P1CharRate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P1CharRate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P1PayRate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P1PayRate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P1StartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P1StartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P1EndtDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P1EndtDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P2CharRate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P2CharRate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P2PayRate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P2PayRate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P2StartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P2StartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P2EndtDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P2EndtDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P3CharRate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P3CharRate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P3PayRate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P3PayRate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P3StartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P3StartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P3EndtDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P3EndtDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P4CharRate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P4CharRate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P4PayRate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P4PayRate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P4StartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P4StartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.P4EndtDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.P4EndtDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Renewal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Renewal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActiveContract)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActiveContract)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Contractor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contractor.ContractorId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Company.CompanyId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ContractId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
