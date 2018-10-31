@@ -37,7 +37,7 @@ namespace CMPT395Project
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             var connection = @"Server=DESKTOP-GD918O0\mssqllocaldb;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<EmployeeContext>
+            services.AddDbContext<ProjectContext>
                 (options => options.UseSqlServer(connection));
         }
 
