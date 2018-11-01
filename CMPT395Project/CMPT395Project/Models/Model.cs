@@ -24,23 +24,17 @@ namespace CMPT395Project.Models
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Configurations.Add( new Contract.StudentMapping());
-
             modelBuilder.Entity<EmployeeHour>()
                 .HasOne(h => h.Contract)
                 .WithMany(c => c.EmployeeHours)
                 .HasForeignKey(h => h.ContractId)
                 .HasConstraintName("ForeignKey_EmployeeHours_Contract");
-                //.OnDelete(DeleteBehavior.Cascade)
-                //.IsRequired();
 
             modelBuilder.Entity<Contractor>()
                 .HasOne(cnt => cnt.Company)
                 .WithMany(cmp => cmp.Contractors)
                 .HasForeignKey(cnt => cnt.CompanyId)
                 .HasConstraintName("ForeignKey_Contractor_Company");
-            //.OnDelete(DeleteBehavior.Cascade)
-            //.IsRequired();
 
             modelBuilder
                 .Entity<Contract>()
@@ -51,30 +45,6 @@ namespace CMPT395Project.Models
                 .Entity<Contract>()
                 .HasOne(x => x.Contractor)
                 .WithMany(y => y.Contracts);
-            /*
-            modelBuilder.Entity<Contract>()
-                .HasOne(cnt => cnt.Company)
-                .WithMany(cmp => cmp.Contracts)
-                .HasForeignKey(cnt => cnt.CompanyId)
-                .HasConstraintName("ForeignKey_Contract_Company")
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired();
-
-            modelBuilder.Entity<Contract>()
-                .HasOne(cnt => cnt.Contractor)
-                .WithMany(cmp => cmp.Contracts)
-                .HasForeignKey(cnt => cnt.ContractorId)
-                .HasConstraintName("ForeignKey_Contract_Contractor")
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired();
-                */
-            /*modelBuilder.Entity<Employee>()
-                .Property(e => e.FirstName)
-                .HasDefaultValue(null);
-
-            modelBuilder.Entity<Employee>()
-                .Property(e => e.LastName)
-                .HasDefaultValue(null);*/
         }
     }
 
@@ -115,12 +85,7 @@ namespace CMPT395Project.Models
         public int CompanyId { get; set; }
         public string CompanyName { get; set; }
         public ICollection<Contractor> Contractors { set; get; }
-        //public List<Contractor> Contractors { set; get; }
-
-        //[InverseProperty("CompanyId")]
         public ICollection<Contract> Contracts { set; get; }
-        //public List<Contract> Contracts { set; get; }
-        //public virtual ICollection<Contract> CompanyContract { get; set; }
     }
 
     public class Contractor
@@ -133,19 +98,13 @@ namespace CMPT395Project.Models
         public Company Company { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-
-        //[InverseProperty("ContractorId")]
         public ICollection<Contract> Contracts { get; set; }
-        //public List<Contract> Contracts { get; set; }
-        //public virtual ICollection<Contract> ContractorContract { get; set; }
     }
 
     public class Contract
     {
         [Key]
         public int ContractId { get; set; }
-       // public int ContractorId { get; set; }
-        //public int CompanyId { get; set; }
         public int P1CharRate { get; set; }
         public int P1PayRate { get; set; }
         public DateTime P1StartDate { get; set; }
@@ -170,7 +129,6 @@ namespace CMPT395Project.Models
         public Char ActiveContract { get; set; }
 
         public ICollection<EmployeeHour> EmployeeHours { get; set; }
-        //public List<EmployeeHour> EmployeeHours { get; set; }
 
 
         [ForeignKey("ContractorId")]
