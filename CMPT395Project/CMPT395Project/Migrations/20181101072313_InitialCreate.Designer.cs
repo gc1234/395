@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CMPT395Project.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20181031050114_InitialCreate")]
+    [Migration("20181101072313_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,9 +61,9 @@ namespace CMPT395Project.Migrations
                         .IsRequired()
                         .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
 
-                    b.Property<int>("CompanyId");
+                    b.Property<int?>("CompanyId");
 
-                    b.Property<int>("ContractorId");
+                    b.Property<int?>("ContractorId");
 
                     b.Property<int>("P1CharRate");
 
@@ -116,8 +116,6 @@ namespace CMPT395Project.Migrations
 
                     b.Property<int>("CompanyId");
 
-                    b.Property<int?>("ContracsContractId");
-
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
@@ -129,8 +127,6 @@ namespace CMPT395Project.Migrations
                     b.HasKey("ContractorId");
 
                     b.HasIndex("CompanyId");
-
-                    b.HasIndex("ContracsContractId");
 
                     b.ToTable("Contractor");
                 });
@@ -179,15 +175,11 @@ namespace CMPT395Project.Migrations
                 {
                     b.HasOne("CMPT395Project.Models.Company", "Company")
                         .WithMany("Contracts")
-                        .HasForeignKey("CompanyId")
-                        .HasConstraintName("ForeignKey_Contract_Company")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CompanyId");
 
                     b.HasOne("CMPT395Project.Models.Contractor", "Contractor")
                         .WithMany("Contracts")
-                        .HasForeignKey("ContractorId")
-                        .HasConstraintName("ForeignKey_Contract_Contractor")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ContractorId");
                 });
 
             modelBuilder.Entity("CMPT395Project.Models.Contractor", b =>
@@ -197,10 +189,6 @@ namespace CMPT395Project.Migrations
                         .HasForeignKey("CompanyId")
                         .HasConstraintName("ForeignKey_Contractor_Company")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CMPT395Project.Models.Contract", "Contracs")
-                        .WithMany()
-                        .HasForeignKey("ContracsContractId");
                 });
 
             modelBuilder.Entity("CMPT395Project.Models.EmployeeHour", b =>
@@ -208,7 +196,7 @@ namespace CMPT395Project.Migrations
                     b.HasOne("CMPT395Project.Models.Contract", "Contract")
                         .WithMany("EmployeeHours")
                         .HasForeignKey("ContractId")
-                        .HasConstraintName("ForeignKey_EmployeeHours_Contractor")
+                        .HasConstraintName("ForeignKey_EmployeeHours_Contract")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

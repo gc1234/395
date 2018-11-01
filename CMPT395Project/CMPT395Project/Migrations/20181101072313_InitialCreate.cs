@@ -52,13 +52,34 @@ namespace CMPT395Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Contractor",
+                columns: table => new
+                {
+                    ContractorId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    CompanyId = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contractor", x => x.ContractorId);
+                    table.ForeignKey(
+                        name: "ForeignKey_Contractor_Company",
+                        column: x => x.CompanyId,
+                        principalTable: "Company",
+                        principalColumn: "CompanyId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Contract",
                 columns: table => new
                 {
                     ContractId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ContractorId = table.Column<int>(nullable: false),
-                    CompanyId = table.Column<int>(nullable: false),
                     P1CharRate = table.Column<int>(nullable: false),
                     P1PayRate = table.Column<int>(nullable: false),
                     P1StartDate = table.Column<DateTime>(nullable: false),
@@ -76,46 +97,24 @@ namespace CMPT395Project.Migrations
                     P4StartDate = table.Column<DateTime>(nullable: false),
                     P4EndtDate = table.Column<DateTime>(nullable: false),
                     Renewal = table.Column<string>(nullable: true),
-                    ActiveContract = table.Column<string>(nullable: false)
+                    ActiveContract = table.Column<string>(nullable: false),
+                    ContractorId = table.Column<int>(nullable: true),
+                    CompanyId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contract", x => x.ContractId);
                     table.ForeignKey(
-                        name: "ForeignKey_Contract_Company",
+                        name: "FK_Contract_Company_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Company",
                         principalColumn: "CompanyId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Contractor",
-                columns: table => new
-                {
-                    ContractorId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    CompanyId = table.Column<int>(nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    ContracsContractId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contractor", x => x.ContractorId);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "ForeignKey_Contractor_Company",
-                        column: x => x.CompanyId,
-                        principalTable: "Company",
-                        principalColumn: "CompanyId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Contractor_Contract_ContracsContractId",
-                        column: x => x.ContracsContractId,
-                        principalTable: "Contract",
-                        principalColumn: "ContractId",
+                        name: "FK_Contract_Contractor_ContractorId",
+                        column: x => x.ContractorId,
+                        principalTable: "Contractor",
+                        principalColumn: "ContractorId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -135,7 +134,7 @@ namespace CMPT395Project.Migrations
                 {
                     table.PrimaryKey("PK_EmployeeHour", x => x.TimeSheetId);
                     table.ForeignKey(
-                        name: "ForeignKey_EmployeeHours_Contractor",
+                        name: "ForeignKey_EmployeeHours_Contract",
                         column: x => x.ContractId,
                         principalTable: "Contract",
                         principalColumn: "ContractId",
@@ -158,38 +157,13 @@ namespace CMPT395Project.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contractor_ContracsContractId",
-                table: "Contractor",
-                column: "ContracsContractId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_EmployeeHour_ContractId",
                 table: "EmployeeHour",
                 column: "ContractId");
-
-            migrationBuilder.AddForeignKey(
-                name: "ForeignKey_Contract_Contractor",
-                table: "Contract",
-                column: "ContractorId",
-                principalTable: "Contractor",
-                principalColumn: "ContractorId",
-                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "ForeignKey_Contract_Company",
-                table: "Contract");
-
-            migrationBuilder.DropForeignKey(
-                name: "ForeignKey_Contractor_Company",
-                table: "Contractor");
-
-            migrationBuilder.DropForeignKey(
-                name: "ForeignKey_Contract_Contractor",
-                table: "Contract");
-
             migrationBuilder.DropTable(
                 name: "Admin");
 
@@ -200,13 +174,13 @@ namespace CMPT395Project.Migrations
                 name: "EmployeeHour");
 
             migrationBuilder.DropTable(
-                name: "Company");
+                name: "Contract");
 
             migrationBuilder.DropTable(
                 name: "Contractor");
 
             migrationBuilder.DropTable(
-                name: "Contract");
+                name: "Company");
         }
     }
 }

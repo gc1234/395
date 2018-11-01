@@ -24,6 +24,12 @@
             @Html.DisplayFor(model => model.LastName)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Company.CompanyId)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd>
@@ -34,12 +40,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Company)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Company.CompanyId)
         </dd>
     </dl>
     

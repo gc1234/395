@@ -58,7 +58,7 @@ namespace CMPT395Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ContractId,ContractorId,CompanyId,P1CharRate,P1PayRate,P1StartDate,P1EndtDate,P2CharRate,P2PayRate,P2StartDate,P2EndtDate,P3CharRate,P3PayRate,P3StartDate,P3EndtDate,P4CharRate,P4PayRate,P4StartDate,P4EndtDate,Renewal,ActiveContract")] Contract contract)
+        public async Task<IActionResult> Create([Bind("ContractId,P1CharRate,P1PayRate,P1StartDate,P1EndtDate,P2CharRate,P2PayRate,P2StartDate,P2EndtDate,P3CharRate,P3PayRate,P3StartDate,P3EndtDate,P4CharRate,P4PayRate,P4StartDate,P4EndtDate,Renewal,ActiveContract,ContractorId,CompanyId")] Contract contract)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace CMPT395Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ContractId,ContractorId,CompanyId,P1CharRate,P1PayRate,P1StartDate,P1EndtDate,P2CharRate,P2PayRate,P2StartDate,P2EndtDate,P3CharRate,P3PayRate,P3StartDate,P3EndtDate,P4CharRate,P4PayRate,P4StartDate,P4EndtDate,Renewal,ActiveContract")] Contract contract)
+        public async Task<IActionResult> Edit(int id, [Bind("ContractId,P1CharRate,P1PayRate,P1StartDate,P1EndtDate,P2CharRate,P2PayRate,P2StartDate,P2EndtDate,P3CharRate,P3PayRate,P3StartDate,P3EndtDate,P4CharRate,P4PayRate,P4StartDate,P4EndtDate,Renewal,ActiveContract,ContractorId,CompanyId")] Contract contract)
         {
             if (id != contract.ContractId)
             {
