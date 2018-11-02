@@ -5170,7 +5170,7 @@
       ]
     },
     "Microsoft.AspNetCore.Razor.Design/2.1.1": {
-      "sha512": "BOK5fckW9v7xWjpEI6bPGwkjw10OPVASZcAa8HoWJo/0Mmg4Azddj92v8noU+YgvD/6zNZ9o/RiRXXKxk5rYwQ==",
+      "sha512": "f8PKGcxiezL1RVqmnmrazj24Mj4KCTSXqwdotl7Lc+82h8iLV7ItxEIShTJakG7M9iw0ZuCocM0J/IhYesdQrg==",
       "type": "package",
       "path": "microsoft.aspnetcore.razor.design/2.1.1",
       "files": [
@@ -11501,23 +11501,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\GrahamCooper\\.nuget\\packages\\": {},
+    "C:\\Users\\Serendipity\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\GrahamCooper\\Source\\Repos\\395\\Test\\Test.csproj",
+      "projectUniqueName": "C:\\Users\\Serendipity\\Desktop\\Visual Studio code\\gc1234\\395\\Test\\Test.csproj",
       "projectName": "Test",
-      "projectPath": "C:\\Users\\GrahamCooper\\Source\\Repos\\395\\Test\\Test.csproj",
-      "packagesPath": "C:\\Users\\GrahamCooper\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\GrahamCooper\\Source\\Repos\\395\\Test\\obj\\",
+      "projectPath": "C:\\Users\\Serendipity\\Desktop\\Visual Studio code\\gc1234\\395\\Test\\Test.csproj",
+      "packagesPath": "C:\\Users\\Serendipity\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Serendipity\\Desktop\\Visual Studio code\\gc1234\\395\\Test\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\GrahamCooper\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Serendipity\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

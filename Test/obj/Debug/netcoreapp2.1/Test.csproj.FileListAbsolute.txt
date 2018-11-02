@@ -62,3 +62,11 @@ C:\Users\GrahamCooper\Source\Repos\395\Test\obj\Debug\netcoreapp2.1\Test.Views.p
 C:\Users\GrahamCooper\Source\Repos\395\Test\obj\Debug\netcoreapp2.1\Test.dll
 C:\Users\GrahamCooper\Source\Repos\395\Test\obj\Debug\netcoreapp2.1\Test.pdb
 C:\Users\GrahamCooper\Source\Repos\395\Test\obj\Debug\netcoreapp2.1\Test.csproj.CopyComplete
+C:\Users\Serendipity\Desktop\Visual Studio code\gc1234\395\Test\obj\Debug\netcoreapp2.1\Test.csprojAssemblyReference.cache
+C:\Users\Serendipity\Desktop\Visual Studio code\gc1234\395\Test\obj\Debug\netcoreapp2.1\Test.csproj.CoreCompileInputs.cache
+C:\Users\Serendipity\Desktop\Visual Studio code\gc1234\395\Test\obj\Debug\netcoreapp2.1\Test.RazorAssemblyInfo.cache
+C:\Users\Serendipity\Desktop\Visual Studio code\gc1234\395\Test\obj\Debug\netcoreapp2.1\Test.RazorAssemblyInfo.cs
+C:\Users\Serendipity\Desktop\Visual Studio code\gc1234\395\Test\obj\Debug\netcoreapp2.1\Test.AssemblyInfoInputs.cache
+C:\Users\Serendipity\Desktop\Visual Studio code\gc1234\395\Test\obj\Debug\netcoreapp2.1\Test.AssemblyInfo.cs
+C:\Users\Serendipity\Desktop\Visual Studio code\gc1234\395\Test\obj\Debug\netcoreapp2.1\Test.dll
+C:\Users\Serendipity\Desktop\Visual Studio code\gc1234\395\Test\obj\Debug\netcoreapp2.1\Test.pdb
