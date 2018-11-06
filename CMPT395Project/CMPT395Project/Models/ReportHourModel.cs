@@ -8,7 +8,7 @@ namespace CMPT395Project.Models
     public class ReportHourModel
     {
         [Required]
-        public string Hour { get; set; }
+        public string StoreHour { get; set; }
         public bool InvalidHour { get; set; }
     }
 }

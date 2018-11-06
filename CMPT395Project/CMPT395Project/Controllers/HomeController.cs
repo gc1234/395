@@ -75,7 +75,7 @@ namespace CMPT395Project.Controllers
                         
                         // If the row were looking for exists, ExecuteScalar juts returns it 
                         con.Open();
-                        object obj = cmd.ExecuteScalar();
+                        Object obj = cmd.ExecuteScalar();
                         con.Close();
 
                         // if it exists
@@ -131,15 +131,39 @@ namespace CMPT395Project.Controllers
         public IActionResult ReportHour(ReportHourModel Hour) {
 
             Hour.InvalidHour = true;
-            //We should have more restriction but this is fine for demonstration as example for now
-            string h = Hour.Hour;
-            int NumOfHour;
-            bool isNumber = int.TryParse(h, out NumOfHour);
-            if ( isNumber == true )
+            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+
+
+
+
+                //We should have more restriction but this is fine for demonstration as example for now
+                bool isNumber = int.TryParse(Hour.StoreHour, out int NumOfHour);
+            if ((isNumber == true) && (NumOfHour >= 0) && (NumOfHour < 300))
             {
                 Hour.InvalidHour = false;
-                //Do code to Database
                 return RedirectToAction("Main");
+
+                /*
+                //Do code to Database
+                using (SqlConnection con = new SqlConnection(db))
+                {
+
+
+                    string sql = "SELECT contractor_id FROM contractor WHERE email = '" + SessionName + "'";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+                        con.Open();
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        con.Close();
+
+                        using (SqlCommand cmd = new SqlCommand(sql, con))
+                        {
+
+                        }
+                            return RedirectToAction("Main");
+                    }
+                } */
             }
             else
             {
