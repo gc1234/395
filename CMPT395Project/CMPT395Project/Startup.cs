@@ -40,7 +40,12 @@ namespace CMPT395Project
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            var connection = @"Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            // This is someones connection i dont know whose
+            // var connection = @"Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+
+            // Eriks connection string
+            var connection = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+
             services.AddDbContext<ProjectContext>
                 (options => options.UseSqlServer(connection));
         }

@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using CMPT395Project.Models;
 using System.Diagnostics;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace CMPT395Project.Controllers
 {
@@ -56,22 +58,50 @@ namespace CMPT395Project.Controllers
 
                 log.FirstLogin = false;
 
-                //This is a checker to see if the user is a valid user and should be replace with a database instead of this test function.
-                if (log.Email.Equals("a@g"))
+                // Just a heads up guys, we might wanna think about implementing some sort of password protector
+                // Im sure its fine and we can leave it if we dont have time, but if we do, hashing the passwords would be our best bet
+
+                // Just comment out my database and put yours
+                const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+
+
+                using (SqlConnection con = new SqlConnection(db))
                 {
 
-                    //Store the Email and Password of the user for authentication
-                    HttpContext.Session.SetString(SessionName, log.Email);
-                    HttpContext.Session.SetString(SessionPassword, log.Password);
-                    //Redirect to about page
-                    return RedirectToAction("About");
-                }
-                //if it is unsuccessful in attempt to login we go back to page with new data aka firstlogin = false;
-                return View(log);
-            }
+                    // If you wanna write any kind of query, do it this way, save it as a string then use it
+                    string sql = "SELECT * FROM contractor WHERE email = '" + log.Email + "' AND password = '" + log.Password + "'";
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+                        
+                        // If the row were looking for exists, ExecuteScalar juts returns it 
+                        con.Open();
+                        object obj = cmd.ExecuteScalar();
+                        con.Close();
 
-            //The MainPage After Login
-          public IActionResult Main() {
+                        // if it exists
+                        if (obj != null)
+                        {
+                             //Store the Email and Password of the user for authentication
+                            HttpContext.Session.SetString(SessionName, log.Email);
+                            HttpContext.Session.SetString(SessionPassword, log.Password);
+                            //Redirect to about page
+                            return RedirectToAction("About");
+                        }
+
+                        // if not
+                        else
+                        {
+                            return View(log);
+                        }
+                    
+                    }
+                }
+              
+        }
+
+
+        //The MainPage After Login
+        public IActionResult Main() {
     
              return View();
           }
@@ -102,7 +132,10 @@ namespace CMPT395Project.Controllers
 
             Hour.InvalidHour = true;
             //We should have more restriction but this is fine for demonstration as example for now
-            if (int.TryParse(Hour.Hour, out int NumOfHour))
+            string h = Hour.Hour;
+            int NumOfHour;
+            bool isNumber = int.TryParse(h, out NumOfHour);
+            if ( isNumber == true )
             {
                 Hour.InvalidHour = false;
                 //Do code to Database
