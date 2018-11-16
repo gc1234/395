@@ -19,14 +19,19 @@ using System.Threading.Tasks;
     public class LoginModel
     {
 
-        [Required]
+       
         [EmailAddress]
         public string Email { get; set; }
-        [Required]
+   
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         public bool FirstLogin { get; set; }
+
+        [EmailAddress]
+        public string AdminEmail { get; set; }
+        [DataType(DataType.Password)]
+        public string AdminPassword { get; set; }
 
 
 
