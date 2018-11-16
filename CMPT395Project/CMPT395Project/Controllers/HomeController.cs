@@ -62,8 +62,8 @@ namespace CMPT395Project.Controllers
             // Im sure its fine and we can leave it if we dont have time, but if we do, hashing the passwords would be our best bet
 
             // Just comment out my database and put yours
-            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-
+            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
 
             using (SqlConnection con = new SqlConnection(db))
             {
