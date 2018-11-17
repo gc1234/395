@@ -21,25 +21,30 @@
 	@Version: 1.0
 	@Date: October 28, 2018
 *@
-<form method="post" asp-action="Index" asp-controller="Home">
-	<div style="position:absolute; top:400px; left:200px;">
-	<label asp-for="Email"></label>
-	<label asp-for="AdminEmail" style="position:absolute; left:800px;"></label>
-	<input asp-for="Email"/>
-	<input asp-for="AdminEmail" style="position:absolute; left:885px;"/>
-		<br />
+    <form method="post" asp-action="Index" asp-controller="Home">
+        <div style="position:absolute; top:400px; left:200px;">
+            <label asp-for="Email"></label>
+                <input asp-for="Email" />
+            <br />
 
 
-	<label asp-for="Password"></label>
-		<label asp-for="AdminPassword" style="position:absolute; left:800px;"></label>
-	<input asp-for="Password" />
-	<input asp-for="AdminPassword" style="position:absolute; left:900px;" />
-		<br />
+            <label asp-for="Password"></label>
+                <input asp-for="Password" />
+            <br />
 
+            Access Level <select id="AccessLevel" name="AccessLevel">
 
-	<input type="submit" value="log in" name="Contractorlogin"/>
+                <option value="Contractor">Contractor</option>
 
-		</div>
-	</form>
+                <option value="Admin">Admin</option>
+
+            </select>
+
+            <br />
+            <br />
+
+            <input type="submit" value="log in" name="Contractorlogin" />
+        </div>
+    </form>
 
 

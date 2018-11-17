@@ -14,6 +14,7 @@ using CMPT395Project.Models;
 using System.Diagnostics;
 using System.Data.SqlClient;
 using System.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CMPT395Project.Controllers
 {
@@ -42,6 +43,8 @@ namespace CMPT395Project.Controllers
             };
             return View(log);
         }
+
+
         /**
          * This Method is called after the User first attempted login and 
          * Saves the Session of the Email and password in addtion to redirecting the user if
@@ -53,48 +56,86 @@ namespace CMPT395Project.Controllers
         [HttpPost]
         public IActionResult Index(LoginModel log)
         {
-
-
-
             log.FirstLogin = false;
-
-            // Just a heads up guys, we might wanna think about implementing some sort of password protector
-            // Im sure its fine and we can leave it if we dont have time, but if we do, hashing the passwords would be our best bet
-
+           
             // Just comment out my database and put yours
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
 
-            using (SqlConnection con = new SqlConnection(db))
+
+            string level = Request.Form["AccessLevel"].ToString();
+
+            if (level == "Contractor")
+            { 
+                using (SqlConnection con = new SqlConnection(db))
+                {
+                
+                    // If you wanna write any kind of query, do it this way, save it as a string then use it
+                    string sql = "SELECT * FROM contractor WHERE email = '" + log.Email + "' AND password = '" + log.Password + "'";
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+
+                        // If the row were looking for exists, ExecuteScalar juts returns it 
+                        con.Open();
+                        Object obj = cmd.ExecuteScalar();
+                        con.Close();
+
+                        // if it exists
+                        if (obj != null)
+                        {
+                            //Store the Email and Password of the user for authentication
+                            HttpContext.Session.SetString(SessionName, log.Email);
+                            HttpContext.Session.SetString(SessionPassword, log.Password);
+                            //Redirect to about page
+                            return RedirectToAction("About");
+                        }
+
+                        // if not
+                        else
+                        {
+                            return View(log);
+                        }
+                    }
+                }
+            }
+            else if ( level == "Admin")
             {
-
-                // If you wanna write any kind of query, do it this way, save it as a string then use it
-                string sql = "SELECT * FROM contractor WHERE email = '" + log.Email + "' AND password = '" + log.Password + "'";
-                using (SqlCommand cmd = new SqlCommand(sql, con))
+                using (SqlConnection con = new SqlConnection(db))
                 {
 
-                    // If the row were looking for exists, ExecuteScalar juts returns it 
-                    con.Open();
-                    Object obj = cmd.ExecuteScalar();
-                    con.Close();
-
-                    // if it exists
-                    if (obj != null)
+                    // If you wanna write any kind of query, do it this way, save it as a string then use it
+                    string sql = "SELECT * FROM admin WHERE admin_id = '" + log.Email + "' AND password = '" + log.Password + "'";
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
                     {
-                        //Store the Email and Password of the user for authentication
-                        HttpContext.Session.SetString(SessionName, log.Email);
-                        HttpContext.Session.SetString(SessionPassword, log.Password);
-                        //Redirect to about page
-                        return RedirectToAction("About");
-                    }
 
-                    // if not
-                    else
-                    {
-                        return View(log);
-                    }
+                        // If the row were looking for exists, ExecuteScalar juts returns it 
+                        con.Open();
+                        Object obj = cmd.ExecuteScalar();
+                        con.Close();
 
+                        // if it exists
+                        if (obj != null)
+                        {
+                            //Store the Email and Password of the user for authentication
+                            HttpContext.Session.SetString(SessionName, log.Email);
+                            HttpContext.Session.SetString(SessionPassword, log.Password);
+
+
+                            //Redirect to Grahams page IDK WHICH ONE
+                            return RedirectToAction("About");
+                        }
+
+                        // if not
+                        else
+                        {
+                            return View(log);
+                        }
+                    }
                 }
+            }
+            else
+            {
+                return View(log);
             }
 
         }
@@ -130,39 +171,67 @@ namespace CMPT395Project.Controllers
         public IActionResult ReportHour(ReportHourModel Hour) {
 
             Hour.InvalidHour = true;
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
 
 
 
 
-                //We should have more restriction but this is fine for demonstration as example for now
-                bool isNumber = int.TryParse(Hour.StoreHour, out int NumOfHour);
+            //We should have more restriction but this is fine for demonstration as example for now
+            bool isNumber = int.TryParse(Hour.StoreHour, out int NumOfHour);
+
+            string email = HttpContext.Session.GetString("_Name");
+            int empID = 0;
+            int contractID = 0;
+
             if ((isNumber == true) && (NumOfHour >= 0) && (NumOfHour < 300))
             {
                 Hour.InvalidHour = false;
-                return RedirectToAction("Main");
 
-                /*
                 //Do code to Database
                 using (SqlConnection con = new SqlConnection(db))
                 {
+                    string sql1 = "SELECT contractor_id FROM contractor WHERE email = '" + email + "'";
 
-
-                    string sql = "SELECT contractor_id FROM contractor WHERE email = '" + SessionName + "'";
-
-                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    using (SqlCommand cmd = new SqlCommand(sql1, con))
                     {
                         con.Open();
                         SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            empID = reader.GetInt32(0);
+                        }
+                        reader.Close();
                         con.Close();
 
-                        using (SqlCommand cmd = new SqlCommand(sql, con))
-                        {
-
-                        }
-                            return RedirectToAction("Main");
                     }
-                } */
+
+                    string sql2 = "SELECT contract_id FROM contracts WHERE contractor_id = " + empID + "";
+
+                    using (SqlCommand cmd = new SqlCommand(sql2, con))
+                    {
+                        con.Open();
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            contractID = reader.GetInt32(0);
+                        }
+                        reader.Close();
+                        con.Close();
+
+                    }
+
+                    string sql3 = "INSERT employee_hours (time_sheet_id, contract_id, year, month, currentMonthHours, previousMonthHours) VALUES (1, " + contractID + ", 2017, 1, " + empID + ", 0)";
+
+                    using (SqlCommand cmd = new SqlCommand(sql3, con))
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+
+
+                    }
+                    return RedirectToAction("Main");
+                }
             }
             else
             {

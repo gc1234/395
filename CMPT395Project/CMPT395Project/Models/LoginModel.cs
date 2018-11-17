@@ -2,8 +2,8 @@
 
 namespace CMPT395Project.Models
 {
-
-using System;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -26,16 +26,9 @@ using System.Threading.Tasks;
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        public IEnumerable<SelectListItem> AccessLevel { get; set; }
+
         public bool FirstLogin { get; set; }
-
-        [EmailAddress]
-        public string AdminEmail { get; set; }
-        [DataType(DataType.Password)]
-        public string AdminPassword { get; set; }
-
-
-
-
 
     }
 }
