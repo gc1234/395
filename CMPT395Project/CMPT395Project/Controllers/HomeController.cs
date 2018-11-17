@@ -17,7 +17,7 @@ using System.Data;
 
 namespace CMPT395Project.Controllers
 {
-
+ 
 
         public class HomeController : Controller
         {
@@ -26,20 +26,15 @@ namespace CMPT395Project.Controllers
              * */
             const string SessionName = "_Name";
             const string SessionPassword = "_Password";
-            const string SessionUser = "_User";
-           
-
-        
 
 
-
-        /**
-         * This Function is called the first time the Attempts to login.
-         * @Author: Anthony Wong
-         * @Version 1.0
-         * @Date: October 28,2018
-         * */
-        public IActionResult Index()
+            /**
+             * This Function is called the first time the Attempts to login.
+             * @Author: Anthony Wong
+             * @Version 1.0
+             * @Date: October 28,2018
+             * */
+            public IActionResult Index()
             {
                 LoginModel log = new LoginModel
                 {
@@ -136,66 +131,39 @@ namespace CMPT395Project.Controllers
         public IActionResult ReportHour(ReportHourModel Hour) {
 
             Hour.InvalidHour = true;
-            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
 
-            string x = HttpContext.Session.GetString("_Name");
-            int empID = 0;
-            int contractID = 0;
-            
 
-            //We should have more restriction but this is fine for demonstration as example for now
-            bool isNumber = int.TryParse(Hour.StoreHour, out int NumOfHour);
 
+
+                //We should have more restriction but this is fine for demonstration as example for now
+                bool isNumber = int.TryParse(Hour.StoreHour, out int NumOfHour);
             if ((isNumber == true) && (NumOfHour >= 0) && (NumOfHour < 300))
             {
                 Hour.InvalidHour = false;
+                return RedirectToAction("Main");
 
-
+                /*
                 //Do code to Database
                 using (SqlConnection con = new SqlConnection(db))
                 {
-                    string sql1 = "SELECT contractor_id FROM contractor WHERE email = '"+ x +"'";
 
-                    using (SqlCommand cmd = new SqlCommand(sql1, con))
+
+                    string sql = "SELECT contractor_id FROM contractor WHERE email = '" + SessionName + "'";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
                     {
                         con.Open();
                         SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
+                        con.Close();
+
+                        using (SqlCommand cmd = new SqlCommand(sql, con))
                         {
-                            empID = reader.GetInt32(0);
+
                         }
-                        reader.Close();
-                        con.Close();
-                        
+                            return RedirectToAction("Main");
                     }
-
-                    string sql2 = "SELECT contract_id FROM contracts WHERE contractor_id = " + empID + "";
-
-                    using (SqlCommand cmd = new SqlCommand(sql2, con))
-                    {
-                        con.Open();
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            contractID = reader.GetInt32(0);
-                        }
-                        reader.Close();
-                        con.Close();
-
-                    }
-
-                    string sql3 = "INSERT employee_hours (time_sheet_id, contract_id, year, month, currentMonthHours, previousMonthHours) VALUES (1, " + contractID + ", 2017, 1, " + empID + ", 0)";
-
-                    using (SqlCommand cmd = new SqlCommand(sql3, con))
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        con.Close();
-
-                        
-                    }
-                    return RedirectToAction("Main");
-                }
+                } */
             }
             else
             {
