@@ -17,89 +17,88 @@ using System.Data;
 
 namespace CMPT395Project.Controllers
 {
- 
 
-        public class HomeController : Controller
+
+    public class HomeController : Controller
+    {
+        /**
+         *The two variable below are created to store the user Login information so that it can be authenticated through the different pages.
+         * */
+        const string SessionName = "_Name";
+        const string SessionPassword = "_Password";
+
+
+        /**
+         * This Function is called the first time the Attempts to login.
+         * @Author: Anthony Wong
+         * @Version 1.0
+         * @Date: October 28,2018
+         * */
+        public IActionResult Index()
         {
-            /**
-             *The two variable below are created to store the user Login information so that it can be authenticated through the different pages.
-             * */
-            const string SessionName = "_Name";
-            const string SessionPassword = "_Password";
-
-
-            /**
-             * This Function is called the first time the Attempts to login.
-             * @Author: Anthony Wong
-             * @Version 1.0
-             * @Date: October 28,2018
-             * */
-            public IActionResult Index()
+            LoginModel log = new LoginModel
             {
-                LoginModel log = new LoginModel
-                {
-                    FirstLogin = true
-                };
-                return View(log);
-            }
-            /**
-             * This Method is called after the User first attempted login and 
-             * Saves the Session of the Email and password in addtion to redirecting the user if
-             * it is a valid login.
-             * @Author: Anthony Wong
-             * @Version 1.0
-             * @Date: October 28,2018
-             * */
-            [HttpPost]
-            public IActionResult Index(LoginModel log)
-            {
-
-
-
-                log.FirstLogin = false;
-
-                // Just a heads up guys, we might wanna think about implementing some sort of password protector
-                // Im sure its fine and we can leave it if we dont have time, but if we do, hashing the passwords would be our best bet
-
-                // Just comment out my database and put yours
-                const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-
-
-                using (SqlConnection con = new SqlConnection(db))
-                {
-
-                    // If you wanna write any kind of query, do it this way, save it as a string then use it
-                    string sql = "SELECT * FROM contractor WHERE email = '" + log.Email + "' AND password = '" + log.Password + "'";
-                    using (SqlCommand cmd = new SqlCommand(sql, con))
-                    {
-                        
-                        // If the row were looking for exists, ExecuteScalar juts returns it 
-                        con.Open();
-                        Object obj = cmd.ExecuteScalar();
-                        con.Close();
-
-                        // if it exists
-                        if (obj != null)
-                        {
-                             //Store the Email and Password of the user for authentication
-                            HttpContext.Session.SetString(SessionName, log.Email);
-                            HttpContext.Session.SetString(SessionPassword, log.Password);
-                            //Redirect to about page
-                            return RedirectToAction("About");
-                        }
-
-                        // if not
-                        else
-                        {
-                            return View(log);
-                        }
-                    
-                    }
-                }
-              
+                FirstLogin = true
+            };
+            return View(log);
         }
+        /**
+         * This Method is called after the User first attempted login and 
+         * Saves the Session of the Email and password in addtion to redirecting the user if
+         * it is a valid login.
+         * @Author: Anthony Wong
+         * @Version 1.0
+         * @Date: October 28,2018
+         * */
+        [HttpPost]
+        public IActionResult Index(LoginModel log)
+        {
 
 
+
+            log.FirstLogin = false;
+
+            // Just a heads up guys, we might wanna think about implementing some sort of password protector
+            // Im sure its fine and we can leave it if we dont have time, but if we do, hashing the passwords would be our best bet
+
+            // Just comment out my database and put yours
+            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+
+            using (SqlConnection con = new SqlConnection(db))
+            {
+
+                // If you wanna write any kind of query, do it this way, save it as a string then use it
+                string sql = "SELECT * FROM contractor WHERE email = '" + log.Email + "' AND password = '" + log.Password + "'";
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+
+                    // If the row were looking for exists, ExecuteScalar juts returns it 
+                    con.Open();
+                    Object obj = cmd.ExecuteScalar();
+                    con.Close();
+
+                    // if it exists
+                    if (obj != null)
+                    {
+                        //Store the Email and Password of the user for authentication
+                        HttpContext.Session.SetString(SessionName, log.Email);
+                        HttpContext.Session.SetString(SessionPassword, log.Password);
+                        //Redirect to about page
+                        return RedirectToAction("About");
+                    }
+
+                    // if not
+                    else
+                    {
+                        return View(log);
+                    }
+
+                }
+            }
+
+        }
+    
         //The MainPage After Login
         public IActionResult Main() {
     
