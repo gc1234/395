@@ -57,7 +57,8 @@ namespace CMPT395Project.Controllers
         public IActionResult Index(LoginModel log)
         {
             log.FirstLogin = false;
-           
+            bool isNumber = int.TryParse(log.Username, out int NumOfHour);
+
             // Just comment out my database and put yours
             const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
             //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
@@ -71,7 +72,7 @@ namespace CMPT395Project.Controllers
                 {
                 
                     // If you wanna write any kind of query, do it this way, save it as a string then use it
-                    string sql = "SELECT * FROM contractor WHERE email = '" + log.Email + "' AND password = '" + log.Password + "'";
+                    string sql = "SELECT * FROM contractor WHERE email = '" + log.Username + "' AND password = '" + log.Password + "'";
                     using (SqlCommand cmd = new SqlCommand(sql, con))
                     {
 
@@ -84,7 +85,7 @@ namespace CMPT395Project.Controllers
                         if (obj != null)
                         {
                             //Store the Email and Password of the user for authentication
-                            HttpContext.Session.SetString(SessionName, log.Email);
+                            HttpContext.Session.SetString(SessionName, log.Username);
                             HttpContext.Session.SetString(SessionPassword, log.Password);
                             //Redirect to about page
                             return RedirectToAction("About");
@@ -98,13 +99,13 @@ namespace CMPT395Project.Controllers
                     }
                 }
             }
-            else if ( level == "Admin")
+            else if (( level == "Admin") && (isNumber == true))
             {
                 using (SqlConnection con = new SqlConnection(db))
                 {
 
                     // If you wanna write any kind of query, do it this way, save it as a string then use it
-                    string sql = "SELECT * FROM admin WHERE admin_id = '" + log.Email + "' AND password = '" + log.Password + "'";
+                    string sql = "SELECT * FROM admin WHERE admin_id = '" + log.Username + "' AND password = '" + log.Password + "'";
                     using (SqlCommand cmd = new SqlCommand(sql, con))
                     {
 
@@ -117,7 +118,7 @@ namespace CMPT395Project.Controllers
                         if (obj != null)
                         {
                             //Store the Email and Password of the user for authentication
-                            HttpContext.Session.SetString(SessionName, log.Email);
+                            HttpContext.Session.SetString(SessionName, log.Username);
                             HttpContext.Session.SetString(SessionPassword, log.Password);
 
 
