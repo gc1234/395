@@ -60,8 +60,8 @@ namespace CMPT395Project.Controllers
             bool isNumber = int.TryParse(log.Username, out int NumOfHour);
 
             // Just comment out my database and put yours
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
 
 
             string level = Request.Form["AccessLevel"].ToString();
@@ -161,6 +161,7 @@ namespace CMPT395Project.Controllers
             };
             return View(Hour);
           }
+
 
         /**
          * This View is called after the user submits data back to the database
