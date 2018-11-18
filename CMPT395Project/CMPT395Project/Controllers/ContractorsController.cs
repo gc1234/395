@@ -19,10 +19,26 @@ namespace CMPT395Project.Controllers
         }
 
         // GET: Contractors
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var projectContext = _context.Contractor.Include(c => c.Company);
-            return View(await projectContext.ToListAsync());
+
+            var contractors = from c in projectContext
+                         select c;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                contractors = contractors.Where(s => s.LastName.Contains(searchString));
+            }
+            return View(await contractors.ToListAsync());
+
+            //return View(await projectContext.ToListAsync());
+        }
+
+        [HttpPost]
+        public string Index(string searchString, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchString;
         }
 
         // GET: Contractors/Details/5

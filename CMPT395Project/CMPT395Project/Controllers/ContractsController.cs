@@ -19,10 +19,26 @@ namespace CMPT395Project.Controllers
         }
 
         // GET: Contracts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var projectContext = _context.Contract.Include(c => c.Company).Include(c => c.Contractor);
-            return View(await projectContext.ToListAsync());
+
+            var contracts = from c in projectContext
+                            select c;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                contracts = contracts.Where(s => s.Renewal.Contains(searchString));
+            }
+            return View(await contracts.ToListAsync());
+
+            //return View(await projectContext.ToListAsync());
+        }
+
+        [HttpPost]
+        public string Index(string searchString, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchString;
         }
 
         // GET: Contracts/Details/5

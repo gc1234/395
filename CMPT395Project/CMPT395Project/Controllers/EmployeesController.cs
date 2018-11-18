@@ -19,9 +19,23 @@ namespace CMPT395Project.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Employee.ToListAsync());
+            var employees = from e in _context.Employee
+                         select e;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                employees = employees.Where(s => s.LastName.Contains(searchString));
+            }
+            return View(await employees.ToListAsync());
+            //return View(await _context.Employee.ToListAsync());
+        }
+
+        [HttpPost]
+        public string Index(string searchString, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchString;
         }
 
         // GET: Employees/Details/5
