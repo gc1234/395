@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CMPT395Project.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20181101072313_InitialCreate")]
+    [Migration("20181120085437_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,35 +65,43 @@ namespace CMPT395Project.Migrations
 
                     b.Property<int?>("ContractorId");
 
-                    b.Property<int>("P1CharRate");
+                    b.Property<decimal>("P1CharRate")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("P1EndtDate");
 
-                    b.Property<int>("P1PayRate");
+                    b.Property<decimal>("P1PayRate")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("P1StartDate");
 
-                    b.Property<int>("P2CharRate");
+                    b.Property<decimal>("P2CharRate")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("P2EndtDate");
 
-                    b.Property<int>("P2PayRate");
+                    b.Property<decimal>("P2PayRate")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("P2StartDate");
 
-                    b.Property<int>("P3CharRate");
+                    b.Property<decimal>("P3CharRate")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("P3EndtDate");
 
-                    b.Property<int>("P3PayRate");
+                    b.Property<decimal>("P3PayRate")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("P3StartDate");
 
-                    b.Property<int>("P4CharRate");
+                    b.Property<decimal>("P4CharRate")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("P4EndtDate");
 
-                    b.Property<int>("P4PayRate");
+                    b.Property<decimal>("P4PayRate")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("P4StartDate");
 

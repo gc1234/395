@@ -60,8 +60,8 @@ namespace CMPT395Project.Controllers
             bool isNumber = int.TryParse(log.Username, out int NumOfHour);
 
             // Just comment out my database and put yours
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
 
 
             string level = Request.Form["AccessLevel"].ToString();
@@ -105,7 +105,7 @@ namespace CMPT395Project.Controllers
                 {
 
                     // If you wanna write any kind of query, do it this way, save it as a string then use it
-                    string sql = "SELECT * FROM admin WHERE admin_id = '" + log.Username + "' AND password = '" + log.Password + "'";
+                    string sql = "SELECT * FROM admin WHERE AdminId = '" + log.Username + "' AND Password = '" + log.Password + "'";
                     using (SqlCommand cmd = new SqlCommand(sql, con))
                     {
 
@@ -122,8 +122,7 @@ namespace CMPT395Project.Controllers
                             HttpContext.Session.SetString(SessionPassword, log.Password);
 
 
-                            //Redirect to Grahams page IDK WHICH ONE
-                            return RedirectToAction("About");
+                            return RedirectToAction("Create", "Admins");
                         }
 
                         // if not
@@ -184,6 +183,8 @@ namespace CMPT395Project.Controllers
             string email = HttpContext.Session.GetString("_Name");
             int empID = 0;
             int contractID = 0;
+            int actualMonth = DateTime.Now.Month;
+            int actualYear = DateTime.Now.Year;
 
             if ((isNumber == true) && (NumOfHour >= 0) && (NumOfHour < 300))
             {
@@ -192,7 +193,7 @@ namespace CMPT395Project.Controllers
                 //Do code to Database
                 using (SqlConnection con = new SqlConnection(db))
                 {
-                    string sql1 = "SELECT contractor_id FROM contractor WHERE email = '" + email + "'";
+                    string sql1 = "SELECT ContractorID FROM Contractor WHERE Email = '" + email + "'";
 
                     using (SqlCommand cmd = new SqlCommand(sql1, con))
                     {
@@ -207,7 +208,7 @@ namespace CMPT395Project.Controllers
 
                     }
 
-                    string sql2 = "SELECT contract_id FROM contracts WHERE contractor_id = " + empID + "";
+                    string sql2 = "SELECT ContractId FROM Contract WHERE ContractId = " + empID + "";
 
                     using (SqlCommand cmd = new SqlCommand(sql2, con))
                     {
@@ -222,7 +223,8 @@ namespace CMPT395Project.Controllers
 
                     }
 
-                    string sql3 = "INSERT employee_hours (time_sheet_id, contract_id, year, month, currentMonthHours, previousMonthHours) VALUES (1, " + contractID + ", 2017, 1, " + empID + ", 0)";
+                    string sql3 = "INSERT EmployeeHour (ContractId, Year, Month, CurrentMonth, PreviousMonth) VALUES (" + contractID + ", " + actualYear +", " + actualMonth + ", " + empID + ", 0)";
+
 
                     using (SqlCommand cmd = new SqlCommand(sql3, con))
                     {
@@ -232,7 +234,7 @@ namespace CMPT395Project.Controllers
 
 
                     }
-                    return RedirectToAction("Main");
+                    return RedirectToAction("About");
                 }
             }
             else
