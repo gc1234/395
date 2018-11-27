@@ -22,7 +22,7 @@ namespace CMPT395Project.Controllers
         public async Task<IActionResult> Index(string searchString)
         {
             var projectContext = _context.Contract.Include(c => c.Company).Include(c => c.Contractor);
-
+            
             var contracts = from c in projectContext
                             select c;
 
@@ -32,7 +32,7 @@ namespace CMPT395Project.Controllers
             }
             return View(await contracts.ToListAsync());
 
-            //return View(await projectContext.ToListAsync());
+            return View(await projectContext.ToListAsync());
         }
 
         [HttpPost]

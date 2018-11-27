@@ -68,7 +68,7 @@ namespace CMPT395Project.Models
         [Display(Name = "Time Sheet ID")]
         public int TimeSheetId { get; set; }
 
-        [Display(Name = "Contractor ID")]
+        [Display(Name = "Contract ID")]
         public int ContractId { get; set; }
         public Contract Contract { get; set; }
         public int Year { get; set; }
@@ -134,11 +134,11 @@ namespace CMPT395Project.Models
         [Display(Name = "Contract ID")]
         public int ContractId { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
+        //[Column(TypeName = "decimal(18, 2)")]
         [Display(Name = "Period One Charge Rate")]
         public int P1CharRate { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
+        //[Column(TypeName = "decimal(18, 2)")]
         [Display(Name = "Peroid One Pay Rate")]
         public int P1PayRate { get; set; }
 
@@ -149,11 +149,11 @@ namespace CMPT395Project.Models
         public DateTime P1EndtDate { get; set; }
 
 
-        [Column(TypeName = "decimal(18, 2)")]
+        //[Column(TypeName = "decimal(18, 2)")]
         [Display(Name = "Period Two Charge Rate")]
         public int P2CharRate { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
+        //[Column(TypeName = "decimal(18, 2)")]
         [Display(Name = "Peroid Two Pay Rate")]
         public int P2PayRate { get; set; }
 
@@ -164,11 +164,11 @@ namespace CMPT395Project.Models
         public DateTime P2EndtDate { get; set; }
 
 
-        [Column(TypeName = "decimal(18, 2)")]
+        //[Column(TypeName = "decimal(18, 2)")]
         [Display(Name = "Period Three Charge Rate")]
         public int P3CharRate { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
+        //[Column(TypeName = "decimal(18, 2)")]
         [Display(Name = "Peroid Three Pay Rate")]
         public int P3PayRate { get; set; }
 
@@ -179,11 +179,11 @@ namespace CMPT395Project.Models
         public DateTime P3EndtDate { get; set; }
 
 
-        [Column(TypeName = "decimal(18, 2)")]
+        //[Column(TypeName = "decimal(18, 2)")]
         [Display(Name = "Period Four Charge Rate")]
         public int P4CharRate { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
+        //[Column(TypeName = "decimal(18, 2)")]
         [Display(Name = "Peroid Four Pay Rate")]
         public int P4PayRate { get; set; }
 
