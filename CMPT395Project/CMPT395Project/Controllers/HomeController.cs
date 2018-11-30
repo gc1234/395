@@ -44,7 +44,10 @@ namespace CMPT395Project.Controllers
             return View(log);
         }
 
-
+        public IActionResult Logout() {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
+        }
         /**
          * This Method is called after the User first attempted login and 
          * Saves the Session of the Email and password in addtion to redirecting the user if
