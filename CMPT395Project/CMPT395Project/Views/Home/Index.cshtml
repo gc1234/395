@@ -2,49 +2,58 @@
 @{
 	ViewData["Title"] = "Login";
 	Layout = "";
+
 }
-
-@* This Message is printed out if the user unsuccessfully login
-	@Author: Anthony Wong
-	@Version: 1.0
-	@Date: October 28, 2018
-*@
-@if (!Model.FirstLogin)
-{
-	<p>Invalid Email or Password try again.</p>
-}
-
-@*
-	This is a post method that uses the Function Index in the Controller called HomeController and send the result
-	Back into the Model LoginModel.
-	@Author: Anthony Wong
-	@Version: 1.0
-	@Date: October 28, 2018
-*@
-    <form method="post" asp-action="Index" asp-controller="Home">
-        <div style="position:absolute; top:400px; left:200px;">
-            <label asp-for="Username"></label>
-                <input asp-for="Username" />
-            <br />
+<img src="~/images/loginimage.jpg" style="width:100%;"/>
+<environment include="Development">
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
+</environment>
 
 
-            <label asp-for="Password"></label>
-                <input asp-for="Password" />
-            <br />
+	@* This Message is printed out if the user unsuccessfully login
+		@Author: Anthony Wong
+		@Version: 1.0
+		@Date: October 28, 2018
+	*@
 
-            Access Level <select id="AccessLevel" name="AccessLevel">
 
-                <option value="Contractor">Contractor</option>
+	@if (!Model.FirstLogin)
+	{
+		<p>Invalid Email or Password try again.</p>
+	}
 
-                <option value="Admin">Admin</option>
+	@*
+		This is a post method that uses the Function Index in the Controller called HomeController and send the result
+		Back into the Model LoginModel.
+		@Author: Anthony Wong
+		@Version: 1.0
+		@Date: October 28, 2018
+	*@
 
-            </select>
+	<form method="post" asp-action="Index" asp-controller="Home">
+		<div style="position:absolute; top:400px; left:200px;">
+			<label asp-for="Username"></label>
+			<input asp-for="Username" />
+			<br />
 
-            <br />
-            <br />
 
-            <input type="submit" value="log in" name="Contractorlogin" />
-        </div>
-    </form>
+			<label asp-for="Password"></label>
+			<input asp-for="Password" />
+			<br />
 
+			Access Level <select id="AccessLevel" name="AccessLevel">
+
+				<option value="Contractor">Contractor</option>
+
+				<option value="Admin">Admin</option>
+
+			</select>
+
+			<br />
+			<br />
+
+			<input type="submit" value="log in" name="Contractorlogin" />
+		</div>
+	</form>
 
