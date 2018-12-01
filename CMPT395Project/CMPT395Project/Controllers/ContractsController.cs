@@ -32,7 +32,7 @@ namespace CMPT395Project.Controllers
             }
             return View(await contracts.ToListAsync());
 
-            return View(await projectContext.ToListAsync());
+            //return View(await projectContext.ToListAsync());
         }
 
         [HttpPost]

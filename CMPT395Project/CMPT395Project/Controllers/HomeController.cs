@@ -63,8 +63,8 @@ namespace CMPT395Project.Controllers
             bool isNumber = int.TryParse(log.Username, out int NumOfHour);
 
             // Just comment out my database and put yours
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
 
 
             string level = Request.Form["AccessLevel"].ToString();
@@ -228,13 +228,19 @@ namespace CMPT395Project.Controllers
 
                     string sql3 = "INSERT EmployeeHour (ContractId, Year, Month, CurrentMonth, PreviousMonth) VALUES (" + contractID + ", " + actualYear +", " + actualMonth + ", " + empID + ", 0)";
 
-
                     using (SqlCommand cmd = new SqlCommand(sql3, con))
                     {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        con.Close();
+                        if (contractID != 0)
+                        {
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
 
+                        else
+                        {
+                            return RedirectToAction("ErrorContract");
+                        }
 
                     }
                     return RedirectToAction("About");
@@ -247,8 +253,13 @@ namespace CMPT395Project.Controllers
             }
            
         }
-          
-   
+
+        public ViewResult ErrorContract()
+        {
+            return View();
+
+
+        }
 
         public IActionResult About()
         {
