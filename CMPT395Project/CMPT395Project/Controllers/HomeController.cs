@@ -63,8 +63,8 @@ namespace CMPT395Project.Controllers
             bool isNumber = int.TryParse(log.Username, out int NumOfHour);
 
             // Just comment out my database and put yours
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
 
 
             string level = Request.Form["AccessLevel"].ToString();
@@ -175,6 +175,7 @@ namespace CMPT395Project.Controllers
         public IActionResult ReportHour(ReportHourModel Hour) {
 
             Hour.InvalidHour = true;
+            Hour.HoursAlreadyInputted = true;
             const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
 
 
@@ -188,6 +189,7 @@ namespace CMPT395Project.Controllers
             int contractID = 0;
             int actualMonth = DateTime.Now.Month;
             int actualYear = DateTime.Now.Year;
+    
 
             if ((isNumber == true) && (NumOfHour >= 0) && (NumOfHour < 300))
             {
@@ -226,15 +228,23 @@ namespace CMPT395Project.Controllers
 
                     }
 
-                    string sql3 = "INSERT EmployeeHour (ContractId, Year, Month, CurrentMonth, PreviousMonth) VALUES (" + contractID + ", " + actualYear +", " + actualMonth + ", " + empID + ", 0)";
+                    int lastMonth = GetPastMonth(contractID);
+                    string sql3 = "INSERT EmployeeHour (ContractId, Year, Month, CurrentMonth, PreviousMonth) VALUES (" + contractID + ", " + actualYear +", " + actualMonth + ", " + NumOfHour + ", " + lastMonth + ")";
 
                     using (SqlCommand cmd = new SqlCommand(sql3, con))
                     {
-                        if (contractID != 0)
+
+                        if ((contractID != 0) && (PerviouslyEntered(contractID) == false))
                         {
                             con.Open();
                             cmd.ExecuteNonQuery();
                             con.Close();
+                        }
+
+                        else if (PerviouslyEntered(contractID) == true)
+                        {
+                            Hour.HoursAlreadyInputted = true;
+                            return View(Hour);
                         }
 
                         else
@@ -259,6 +269,71 @@ namespace CMPT395Project.Controllers
             return View();
 
 
+        }
+
+        public Boolean PerviouslyEntered(int contractID)
+        {
+            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+
+            using (SqlConnection con = new SqlConnection(db))
+            {
+                string sql = "SELECT * FROM EmployeeHour WHERE ContractId = " + contractID + " AND Year = " + DateTime.Now.Year + " AND Month = " + DateTime.Now.Month + "";
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+
+                    // If the row were looking for exists, ExecuteScalar juts returns it 
+                    con.Open();
+                    Object obj = cmd.ExecuteScalar();
+                    con.Close();
+
+                    // if it exists
+                    if (obj != null)
+                    {
+                        return true;
+                    }
+                    
+                    else
+                    {
+                        return false;
+                    }
+
+                }
+            }
+        }
+
+        public int GetPastMonth(int contractID)
+        {
+            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            int LastMonthsHours = 0;
+            int previousYear = DateTime.Now.Year;
+            int previousMonth = DateTime.Now.Month;
+
+            if (DateTime.Now.Month == 1)
+            {
+                previousYear--;
+                previousMonth = 12;
+            }
+
+
+
+            string sql = "SELECT CurrentMonth FROM EmployeeHour WHERE ContractId = " + contractID + " AND Year = " + previousYear + " AND Month = " + (previousMonth - 1) + "";
+            using (SqlConnection con = new SqlConnection(db))
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LastMonthsHours = reader.GetInt32(0);
+                    }
+                    reader.Close();
+                    con.Close();
+
+                }
+            }
+
+            return LastMonthsHours;
         }
 
         public IActionResult About()

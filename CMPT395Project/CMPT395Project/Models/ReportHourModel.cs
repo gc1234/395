@@ -10,5 +10,11 @@ namespace CMPT395Project.Models
         [Required]
         public string StoreHour { get; set; }
         public bool InvalidHour { get; set; }
+        public bool HoursAlreadyInputted { get; set; }
+
+        [DataType(DataType.Text)]
+        public string UserName { get; set; }
+        public int CurrentMonthHours { get; set; }
+        public int LastMonthHours { get; set; }
     }
 }

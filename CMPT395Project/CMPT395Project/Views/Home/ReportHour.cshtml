@@ -6,16 +6,22 @@
 
 }
 
-@if (Model.InvalidHour) {
-	<p> Please enter a positive, whole number. Max hours input is 300.</p>
+@if (Model.InvalidHour)
+{
+    <p> Please enter a positive, whole number. Max hours input is 300.</p>
+}
+
+@if (Model.HoursAlreadyInputted)
+{
+    <p> Your have already inputted your hours, if you wish to change them, contact your administrator.</p>
 }
 
 <form method="post" asp-action="ReportHour" asp-controller="Home">
-	<text>Enter the number of Hours</text>
-	<input asp-for="StoreHour" />
+    <text>Enter the number of Hours</text>
+    <input asp-for="StoreHour" />
 
 
-	
 
-	<input type="submit" value="submit" />
+
+    <input type="submit" value="submit" />
 </form>
