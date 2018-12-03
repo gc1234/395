@@ -213,7 +213,7 @@ namespace CMPT395Project.Controllers
 
                     }
 
-                    string sql2 = "SELECT ContractId FROM Contract WHERE ContractId = " + empID + "";
+                    string sql2 = "SELECT ContractId FROM Contract WHERE ContractorId = " + empID + "";
 
                     using (SqlCommand cmd = new SqlCommand(sql2, con))
                     {
@@ -314,9 +314,14 @@ namespace CMPT395Project.Controllers
                 previousMonth = 12;
             }
 
+            else
+            {
+                previousMonth--;
+            }
 
 
-            string sql = "SELECT CurrentMonth FROM EmployeeHour WHERE ContractId = " + contractID + " AND Year = " + previousYear + " AND Month = " + (previousMonth - 1) + "";
+
+            string sql = "SELECT CurrentMonth FROM EmployeeHour WHERE ContractId = " + contractID + " AND Year = " + previousYear + " AND Month = " + previousMonth + "";
             using (SqlConnection con = new SqlConnection(db))
             {
                 using (SqlCommand cmd = new SqlCommand(sql, con))

@@ -1,24 +1,40 @@
-﻿@{
+﻿@model EmailModel
+
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 
 }
 
-<form method="post" asp-action="sentEmail" asp-controller="Email">
+<form method="post" asp-action="SentEmail" asp-controller="Email">
 
-    <h2>Enter email</h2>
-    <textarea class="form-control"
-              id="emailHeader"
-              name="emailHeader"
-              rows="1"
-              cols="15">Enter topic of email</textarea>
+    @Html.AntiForgeryToken()
+    <h4>Send emails Contractors</h4>
+    <br /><br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Header, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Header, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Header)
+        </div>
+    </div>
 
 
-    <textarea class="form-control"
-              id="emailBody"
-              name="emailBody"
-              rows="5"
-              cols="15">Enter body of email</textarea>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Message, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Message)
+        </div>
+    </div>
 
-    <input type="submit" value="send" name="emailSend" />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="send" name="emailSend" />
+        </div>
+    </div>
+
+
 </form>
+
+<p> Email: @ViewData["email"], can send? @ViewData["test"]</p>

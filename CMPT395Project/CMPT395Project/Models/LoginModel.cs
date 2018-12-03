@@ -4,11 +4,11 @@ namespace CMPT395Project.Models
 {
     using Microsoft.AspNetCore.Mvc.Rendering;
     using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Threading.Tasks;
 /*
  * This is the Login Model which will contain the Data for the Userlogin
  * @Author: Anthony Wong
