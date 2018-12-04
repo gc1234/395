@@ -71,8 +71,6 @@ namespace CMPT395Project.Controllers
 
         public List<string> GetContactorEmails()
         {
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
             var db = new DatabaseConnect().ConnectionString();
 
             string currentContractor;
@@ -104,8 +102,6 @@ namespace CMPT395Project.Controllers
 
         public Boolean ValidEmail(string email)
         {
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
             var db = new DatabaseConnect().ConnectionString();
 
             int contractID = 0;

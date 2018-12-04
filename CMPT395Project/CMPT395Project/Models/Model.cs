@@ -74,10 +74,10 @@ namespace CMPT395Project.Models
         public int Year { get; set; }
         public int Month { get; set; }
 
-        [Display(Name = "Current Month")]
+        [Display(Name = "Current Month Hours")]
         public int CurrentMonth { get; set; }
 
-        [Display(Name = "Previous Month")]
+        [Display(Name = "Previous Month Hours")]
         public int PreviousMonth { get; set; }
         
     }

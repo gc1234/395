@@ -92,7 +92,7 @@ namespace CMPT395Project.Controllers
                             HttpContext.Session.SetString(SessionName, log.Username);
                             HttpContext.Session.SetString(SessionPassword, log.Password);
                             //Redirect to about page
-                            return RedirectToAction("About");
+                            return RedirectToAction("Welcome");
                         }
 
                         // if not
@@ -177,8 +177,7 @@ namespace CMPT395Project.Controllers
 
             Hour.InvalidHour = true;
             Hour.HoursAlreadyInputted = true;
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+
             var db = new DatabaseConnect().ConnectionString();
 
 
@@ -254,7 +253,7 @@ namespace CMPT395Project.Controllers
                         }
 
                     }
-                    return RedirectToAction("About");
+                    return RedirectToAction("Welcome");
                 }
             }
             else
@@ -274,8 +273,6 @@ namespace CMPT395Project.Controllers
 
         public Boolean PerviouslyEntered(int contractID)
         {
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
             var db = new DatabaseConnect().ConnectionString();
 
             using (SqlConnection con = new SqlConnection(db))
@@ -306,8 +303,6 @@ namespace CMPT395Project.Controllers
 
         public int GetPastMonth(int contractID)
         {
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
             var db = new DatabaseConnect().ConnectionString();
 
             int LastMonthsHours = 0;
@@ -347,12 +342,8 @@ namespace CMPT395Project.Controllers
             return LastMonthsHours;
         }
 
-        public IActionResult About()
+        public IActionResult Welcome()
         {
-              //This is just a checker to make sure data can go between Pages.
-              ViewData["Name"] = HttpContext.Session.GetString(SessionName);
-              ViewData["Message"] = "Your application description page.";
-
               return View();
         }
 
