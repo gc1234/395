@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CMPT395Project.Models;
 using Microsoft.EntityFrameworkCore;
+using CMPT395Project.Class;
 
 namespace CMPT395Project
 {
@@ -40,8 +41,10 @@ namespace CMPT395Project
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            var connection = new DatabaseConnect().ConnectionString();
+
             // This is someones connection i dont know whose
-            var connection = @"Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            //var connection = @"Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
 
             // Eriks connection string
             //var connection = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";

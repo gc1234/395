@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Data.SqlClient;
 using System.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using CMPT395Project.Class;
 
 namespace CMPT395Project.Controllers
 {
@@ -64,8 +65,8 @@ namespace CMPT395Project.Controllers
 
             // Just comment out my database and put yours
             //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
-
+            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+            var db = new DatabaseConnect().ConnectionString();
 
             string level = Request.Form["AccessLevel"].ToString();
 
@@ -177,8 +178,8 @@ namespace CMPT395Project.Controllers
             Hour.InvalidHour = true;
             Hour.HoursAlreadyInputted = true;
             //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
-
+            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+            var db = new DatabaseConnect().ConnectionString();
 
 
             //We should have more restriction but this is fine for demonstration as example for now
@@ -274,7 +275,8 @@ namespace CMPT395Project.Controllers
         public Boolean PerviouslyEntered(int contractID)
         {
             //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+            var db = new DatabaseConnect().ConnectionString();
 
             using (SqlConnection con = new SqlConnection(db))
             {
@@ -305,7 +307,8 @@ namespace CMPT395Project.Controllers
         public int GetPastMonth(int contractID)
         {
             //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+            var db = new DatabaseConnect().ConnectionString();
 
             int LastMonthsHours = 0;
             int previousYear = DateTime.Now.Year;
