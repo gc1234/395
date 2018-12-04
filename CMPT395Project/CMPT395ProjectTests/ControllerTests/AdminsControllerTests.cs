@@ -19,49 +19,6 @@ namespace CMPT395ProjectTests.ControllerTests
 {
     public class AdminsControllerTests
     {
-        /*
-        [Fact]
-        public async Task TestAdminsIndex()
-        {
-            //public DbSet<Admin> Admin { get; set; }
-            //Arrange
-            var mockRepo = new Mock<ProjectContext>();
-            //mockRepo.Setup(repo => repo.Admin())
-                //.ReturnsAsync(GetTestSessions());
-
-            var controller = new AdminsController(mockRepo.Object);
-
-            //Act
-            var result = await controller.Index(null);
-
-            //Assert
-            var viewResult = Assert.IsType<ViewResult>(result);
-            var model = Assert.IsAssignableFrom<IEnumerable<Admin>>(
-                viewResult.ViewData.Model);
-            //Assert.Equal(0, model.Count());
-            Assert.Empty(model);
-        }
-
-        private List<Admin> GetTestSessions()
-        {
-            var sessions = new List<Admin>();
-            sessions.Add(new Admin()
-            {
-                AdminId = 1,
-                FirstName = "test",
-                LastName = "one",
-                Password = "test"
-            });
-            sessions.Add(new Admin()
-            {
-                AdminId = 2,
-                FirstName = "test",
-                LastName = "two",
-                Password = "test"
-            });
-            return sessions;
-        }*/
-
         [Fact]
         public void testAdminsController()
         {
@@ -201,39 +158,5 @@ namespace CMPT395ProjectTests.ControllerTests
             //Assert
             Assert.NotNull(delete);
         }
-
-        /*[Fact]
-        public void testAdminsControllerIndexCount()
-        {
-            //Arrange
-            DbContextOptions<ProjectContext> context = new DbContextOptions<ProjectContext>();
-            ProjectContext projectContext = new ProjectContext(context);
-            AdminsController admin = new AdminsController(projectContext);
-
-            //Act
-            var result = admin.Index("Clooney");
-            //Assert
-            var viewResult = Assert.IsType<ViewResult>(result);
-            var model = Assert.IsAssignableFrom<AdminsController>(viewResult.ViewData.Model);
-            Assert.Equal(1, model.Count());
-        }*/
-
-            /*
-        [Fact]
-        public void testAdminsControllerRedirect()
-        {
-            //Arrange
-            DbContextOptions<ProjectContext> context = new DbContextOptions<ProjectContext>();
-            ProjectContext projectContext = new ProjectContext(context);
-            AdminsController admin = new AdminsController(projectContext);
-
-            //Act
-            var result = admin.Index("");
-
-            //Assert
-            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
-            Assert.Equal("Admins", redirectToActionResult.ControllerName);
-            Assert.Equal("Index", redirectToActionResult.ActionName);
-        }*/
     }
 }

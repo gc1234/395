@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore;
 using CMPT395Project.Models;
+using System.Diagnostics;
 
 namespace CMPT395ProjectTests
 {
@@ -63,18 +64,17 @@ namespace CMPT395ProjectTests
             ViewResult result = controller.ReportHour(reportHourModel) as ViewResult;
 
             //Assert
-            //Assert.NotNull(result);
             Assert.NotNull(reportHourModel);
         }
 
         [Fact]
-        public void TestHomeAbout()
+        public void TestHomeWelcome()
         {
             //Arrange
             HomeController controller = new HomeController();
 
             //Act
-            ViewResult result = controller.About() as ViewResult;
+            ViewResult result = controller.Welcome() as ViewResult;
 
             //Assert
             Assert.NotNull(result);
@@ -185,6 +185,32 @@ namespace CMPT395ProjectTests
 
             //Assert
             Assert.False(result);
+        }
+
+        [Fact]
+        public void TestHomeGetPastMonthTrue()
+        {
+            //Arrange
+            HomeController controller = new HomeController();
+
+            //Act
+            int result = controller.GetPastMonth(2);
+
+            //Assert
+            Assert.Equal(10, result);
+        }
+
+        [Fact]
+        public void TestHomeGetPastMonthFalse()
+        {
+            //Arrange
+            HomeController controller = new HomeController();
+
+            //Act
+            int result = controller.GetPastMonth(2);
+
+            //Assert
+            Assert.NotEqual(7, result);
         }
     }
 }
