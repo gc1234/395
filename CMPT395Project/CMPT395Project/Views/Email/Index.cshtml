@@ -6,10 +6,12 @@
 
 }
 
+<h2>Email Contractors</h2>
+
 <form method="post" asp-action="SentEmail" asp-controller="Email">
 
     @Html.AntiForgeryToken()
-    <h4>Send emails Contractors</h4>
+    @*<h4>Send emails Contractors</h4>*@
     <br /><br />
     <div class="form-group">
         @Html.LabelFor(m => m.Header, new { @class = "col-md-2 control-label" })
