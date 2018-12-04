@@ -160,5 +160,31 @@ namespace CMPT395ProjectTests
             //Assert
             Assert.NotNull(result);
         }
+
+        [Fact]
+        public void TestHomePerviouslyEnteredTrue()
+        {
+            //Arrange
+            HomeController controller = new HomeController();
+           
+            //Act
+            bool result = controller.PerviouslyEntered(1);
+
+            //Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void TestHomePerviouslyEnteredFalse()
+        {
+            //Arrange
+            HomeController controller = new HomeController();
+
+            //Act
+            bool result = controller.PerviouslyEntered(999);
+
+            //Assert
+            Assert.False(result);
+        }
     }
 }

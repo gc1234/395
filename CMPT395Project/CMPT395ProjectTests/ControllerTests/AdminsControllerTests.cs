@@ -8,7 +8,6 @@ using Microsoft.AspNetCore;
 using System.Threading.Tasks;
 using Moq;
 using Microsoft.AspNetCore.Mvc.Testing;
-//using Microsoft.AspNetCore.App;
 using CMPT395Project.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
@@ -87,6 +86,34 @@ namespace CMPT395ProjectTests.ControllerTests
 
             //Act
             var search = admin.Index("");
+            //Assert
+            Assert.NotNull(search);
+        }
+
+        [Fact]
+        public void testAdminsControllerIndexClooney()
+        {
+            //Arrange
+            DbContextOptions<ProjectContext> context = new DbContextOptions<ProjectContext>();
+            ProjectContext projectContext = new ProjectContext(context);
+            AdminsController admin = new AdminsController(projectContext);
+
+            //Act
+            var search = admin.Index("Clooney");
+            //Assert
+            Assert.NotNull(search);
+        }
+
+        [Fact]
+        public void testAdminsControllerIndexDragon()
+        {
+            //Arrange
+            DbContextOptions<ProjectContext> context = new DbContextOptions<ProjectContext>();
+            ProjectContext projectContext = new ProjectContext(context);
+            AdminsController admin = new AdminsController(projectContext);
+
+            //Act
+            var search = admin.Index("Dragon");
             //Assert
             Assert.NotNull(search);
         }
@@ -174,5 +201,39 @@ namespace CMPT395ProjectTests.ControllerTests
             //Assert
             Assert.NotNull(delete);
         }
+
+        /*[Fact]
+        public void testAdminsControllerIndexCount()
+        {
+            //Arrange
+            DbContextOptions<ProjectContext> context = new DbContextOptions<ProjectContext>();
+            ProjectContext projectContext = new ProjectContext(context);
+            AdminsController admin = new AdminsController(projectContext);
+
+            //Act
+            var result = admin.Index("Clooney");
+            //Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<AdminsController>(viewResult.ViewData.Model);
+            Assert.Equal(1, model.Count());
+        }*/
+
+            /*
+        [Fact]
+        public void testAdminsControllerRedirect()
+        {
+            //Arrange
+            DbContextOptions<ProjectContext> context = new DbContextOptions<ProjectContext>();
+            ProjectContext projectContext = new ProjectContext(context);
+            AdminsController admin = new AdminsController(projectContext);
+
+            //Act
+            var result = admin.Index("");
+
+            //Assert
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Admins", redirectToActionResult.ControllerName);
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }*/
     }
 }

@@ -63,8 +63,8 @@ namespace CMPT395Project.Controllers
             bool isNumber = int.TryParse(log.Username, out int NumOfHour);
 
             // Just comment out my database and put yours
-            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
 
 
             string level = Request.Form["AccessLevel"].ToString();
@@ -176,8 +176,8 @@ namespace CMPT395Project.Controllers
 
             Hour.InvalidHour = true;
             Hour.HoursAlreadyInputted = true;
-            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-
+            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
 
 
 
@@ -273,7 +273,8 @@ namespace CMPT395Project.Controllers
 
         public Boolean PerviouslyEntered(int contractID)
         {
-            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
 
             using (SqlConnection con = new SqlConnection(db))
             {
@@ -303,7 +304,9 @@ namespace CMPT395Project.Controllers
 
         public int GetPastMonth(int contractID)
         {
-            const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
+
             int LastMonthsHours = 0;
             int previousYear = DateTime.Now.Year;
             int previousMonth = DateTime.Now.Month;
