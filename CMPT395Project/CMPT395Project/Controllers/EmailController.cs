@@ -22,46 +22,104 @@ namespace CMPT395Project.Controllers
             GetContactorEmails();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Contact(EmailModel model)
+        public IActionResult Index()
         {
-            List<string> emailList = GetContactorEmails();
-            emailList.ElementAt(0);
-            int x = 0;
-            if (x == 0)
-            {
-                var message = new MailMessage();
-                message.To.Add(new MailAddress("erik.halabi.10@gmail.com"));  // replace with valid value 
-                message.From = new MailAddress("halabie2@mymacewan.ca");  // replace with valid value
-                message.Subject = "test";
-                message.Body = "test";
-                message.IsBodyHtml = true;
-
-                using (var smtp = new SmtpClient())
-                {
-                    var credential = new NetworkCredential
-                    {
-                        UserName = "erik.halabi.10@gmail.com",  // replace with valid value
-                        Password = "t5s2hhj72"  // replace with valid value
-                    };
-                    smtp.Credentials = credential;
-                    smtp.Host = "smtp.gmail.com";
-                    smtp.Port = 587;
-                    smtp.EnableSsl = true;
-                    await smtp.SendMailAsync(message);
-                    return RedirectToAction("SentEmail");
-                }
-            }
             return View();
         }
 
-        public ViewResult Index()
+        // Sends Emails
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(EmailModel email)
         {
             List<string> emailList = GetContactorEmails();
-            ViewData["test"] = ValidEmail(emailList.ElementAt(0)).ToString();
-            ViewData["email"] = emailList.ElementAt(0);
-            return View();
+
+            if ((ModelState.IsValid) && (emailList.Count() != 0))
+            {
+                try
+                {
+                    var message = new MailMessage();
+
+                    // add each contractor to send message to
+                    foreach (var contractorEmail in emailList)
+                    {
+                        message.To.Add(new MailAddress(contractorEmail.ToString()));
+                    }
+
+                    message.From = new MailAddress(email.Sender.ToString());  // replace with valid value
+                    message.Subject = email.Header;
+                    message.Body = email.Body;
+                    message.IsBodyHtml = true;
+
+                    using (var smtp = new SmtpClient())
+                    {
+                        var credential = new NetworkCredential
+                        {
+                            UserName = email.Sender.ToString(),  // replace with valid value
+                            Password = email.Pass.ToString(),  // replace with valid value
+                        };
+
+                        // for yahoo accounts
+                        if ((email.Sender.Split('@')[1].Split('.')[0] == "yahoo") || (email.Sender.Split('@')[1].Split('.')[0] == "yahoomail"))
+                        {
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = credential;
+                            smtp.Port = 587;
+                            smtp.Host = "smtp.mail.yahoo.com";
+                            smtp.EnableSsl = true;
+                            await smtp.SendMailAsync(message);
+
+                            return RedirectToAction("SentEmail");
+                        }
+
+                        // for hotmail accounts
+                        else if ((email.Sender.Split('@')[1].Split('.')[0] == "hotmail") || (email.Sender.Split('@')[1].Split('.')[0] == "live") || (email.Sender.Split('@')[1].Split('.')[0] == "outlook"))
+                        {
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = credential;
+                            smtp.Port = 587;
+                            smtp.Host = "smtp-mail.outlook.com";
+                            smtp.EnableSsl = true;
+                            await smtp.SendMailAsync(message);
+
+                            return RedirectToAction("SentEmail");
+                        }
+
+                        // for aol accounts
+                        else if (email.Sender.Split('@')[1].Split('.')[0] == "aol")
+                        {
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = credential;
+                            smtp.Port = 587;
+                            smtp.Host = "smtp.aol.com";
+                            smtp.EnableSsl = true;
+                            await smtp.SendMailAsync(message);
+
+                            return RedirectToAction("SentEmail");
+                        }
+
+                        // for google accounts
+                        else
+                        {
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = credential;
+                            smtp.Host = "smtp.gmail.com";
+                            smtp.Port = 587;
+                            smtp.EnableSsl = true;
+                            await smtp.SendMailAsync(message);
+
+                            return RedirectToAction("SentEmail");
+                        }
+                    }
+                }
+
+                catch
+                {
+                    return RedirectToAction("ErrorEmail");
+                }
+            }
+
+            return View(email);
         }
 
         public ViewResult SentEmail()
@@ -69,10 +127,14 @@ namespace CMPT395Project.Controllers
             return View();
         }
 
+        public ViewResult ErrorEmail()
+        {
+            return View();
+        }
+
+        // Returns a list of contractor emails
         public List<string> GetContactorEmails()
         {
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
             var db = new DatabaseConnect().ConnectionString();
 
             string currentContractor;
@@ -89,7 +151,10 @@ namespace CMPT395Project.Controllers
                     while (reader.Read())
                     {
                         currentContractor = reader.GetString(0);
-                        emailList.Add(currentContractor);
+                        if (ValidEmail(currentContractor))
+                        {
+                            emailList.Add(currentContractor);
+                        }
                         
                     }
                     reader.Close();
@@ -102,10 +167,9 @@ namespace CMPT395Project.Controllers
 
         }
 
+        // Checks if the email of the contractor has inputted his hours for the month
         public Boolean ValidEmail(string email)
         {
-            //const string db = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
-            //const string db = @"Database = CMPT395Project; Trusted_Connection = True; ConnectRetryCount = 0";
             var db = new DatabaseConnect().ConnectionString();
 
             int contractID = 0;

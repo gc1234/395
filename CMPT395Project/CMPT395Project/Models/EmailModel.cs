@@ -9,10 +9,18 @@ namespace CMPT395Project.Models
 {
     public class EmailModel
     {
+
+        [Required]
+        public string Sender { get; set; }
+
+        [Required]
+        public string Pass { get; set; }
+
         [Required]
         public string Header { get; set; }
+
         [Required]
-        public string Message { get; set; }
+        public string Body { get; set; }
 
     }
 }

@@ -33,9 +33,9 @@ namespace CMPT395Project.Class
 
         public string ConnectionString()
         {
-            var connection = @"Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            //var connection = @"Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
             // Eriks connection string
-            //var connection = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=DESKTOP-TK3L6OJ\BASE;Database=CMPT395Project;Trusted_Connection=True;ConnectRetryCount=0";
 
             return connection;
         }
